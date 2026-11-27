@@ -5,6 +5,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-27
+
+### Added
+
+- `LICENSE.md`: Gravitas is now source-available under the PolyForm Noncommercial License 1.0.0.
+- Studio credit in the Controls panel footer (and the "How it works" dialog): Silverlight DevTech mark, copyright, a link to the license, and a "More apps" link to the apps homepage (https://lance6x5.github.io/).
+- `author` / `copyright` meta tags, plus README License and Trademarks sections and a contribution licensing note.
+
+### Changed
+
+- Licensed under PolyForm Noncommercial 1.0.0 (`license` / `author` fields in `package.json`). Previous versions shipped without a license file (all rights reserved); this is the first license.
+
 ## [1.1.0] - 2026-11-27
 
 ### Added

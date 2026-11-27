@@ -243,6 +243,13 @@ input[type='checkbox'], input[type='radio'] { accent-color: var(--brand); width:
 .panel-foot { padding-top: 10px; font-size: 0.8rem; color: var(--muted); text-align: center; }
 .visit-count { display: block; margin-top: 2px; }
 .visit-count[hidden] { display: none; }
+.studio-credit {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 5px;
+  margin: 6px 0 0; font-size: 0.72rem; line-height: 1.6; color: var(--muted);
+}
+.studio-credit img { width: 16px; height: 16px; flex: none; }
+.studio-credit a, #help-dialog .muted a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.studio-credit a:hover, #help-dialog .muted a:hover { color: var(--text); }
 
 /* ---------- Dialogs & toast ---------- */
 dialog {

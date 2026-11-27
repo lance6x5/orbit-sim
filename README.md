@@ -4,6 +4,10 @@
 
 ![Visits](https://abacus.jasoncameron.dev/get/lance6x5.github.io/orbit-sim/shield)
 
+A **Silverlight DevTech** project · © 2026 Silverlight DevTech. Source-available under the [PolyForm Noncommercial License 1.0.0](LICENSE.md).
+
+More apps: [lance6x5.github.io](https://lance6x5.github.io/)
+
 **Every body attracts.** Gravitas is an interactive N-body gravity sandbox where the simulation runs entirely in your browser. Launch planets with a flick, build binary stars, watch the famous figure-eight three-body orbit, and switch integrators to see why physics engines care about numerical methods. The source is commented so it doubles as a learning resource for simulation loops.
 
 Live: https://lance6x5.github.io/orbit-sim/
@@ -93,3 +97,21 @@ Gravitas follows [Semantic Versioning](https://semver.org/). The version lives i
 - **PATCH**: bug fixes.
 
 Changes are recorded in [CHANGELOG.md](CHANGELOG.md), and each release is tagged `vX.Y.Z` with a matching GitHub release.
+
+## License
+
+Gravitas is **source-available**, not OSI-approved open source. It is licensed under the
+[PolyForm Noncommercial License 1.0.0](LICENSE.md) (SPDX: `PolyForm-Noncommercial-1.0.0`).
+
+- **Free for noncommercial use**: personal, educational, research, nonprofit and other noncommercial use.
+- **Commercial use requires a separate commercial license** from Silverlight DevTech. This includes selling it,
+  hosting it as a paid service, or using it inside a business product. To ask about one, open a
+  [GitHub issue](https://github.com/lance6x5/orbit-sim/issues) on this repo.
+- **Redistributing?** Keep [LICENSE.md](LICENSE.md) and its `Required Notice` line with every copy.
+
+Third-party dependencies keep their own licenses.
+
+## Trademarks
+
+Gravitas and its logo are trademarks of Silverlight DevTech. The license covers the code only, not the names
+or logos, so forks must use a different name and logo.
