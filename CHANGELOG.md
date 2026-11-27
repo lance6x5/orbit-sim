@@ -5,6 +5,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-27
+
+### Added
+
+- Anonymous visit counter in the Controls panel footer, using the open-source Abacus service: one count per browser session, nothing counted on localhost or with Do Not Track / Global Privacy Control, no cookies or app data sent, and it fails silently. The service worker never caches these requests.
+- README visits badge and a "Privacy & analytics" section.
+
+### Changed
+
+- Privacy wording in the README and "How it works" dialog now mentions the anonymous visit count.
+
 ## [1.0.0] - 2026-11-27
 
 ### Added
@@ -22,5 +33,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - In-app feedback menu that opens pre-filled GitHub issues, plus bug report and feature request issue templates.
 - GitHub Actions deployment to GitHub Pages.
 
-[Unreleased]: https://github.com/lance6x5/orbit-sim/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/lance6x5/orbit-sim/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/lance6x5/orbit-sim/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/lance6x5/orbit-sim/releases/tag/v1.0.0

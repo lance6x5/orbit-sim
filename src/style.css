@@ -241,6 +241,8 @@ input[type='checkbox'], input[type='radio'] { accent-color: var(--brand); width:
 .saved-list li { display: flex; align-items: center; gap: 6px; }
 .saved-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.9rem; }
 .panel-foot { padding-top: 10px; font-size: 0.8rem; color: var(--muted); text-align: center; }
+.visit-count { display: block; margin-top: 2px; }
+.visit-count[hidden] { display: none; }
 
 /* ---------- Dialogs & toast ---------- */
 dialog {

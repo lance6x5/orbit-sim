@@ -13,6 +13,7 @@ import { PRESETS, buildPreset } from './presets.js';
 import { storage, sanitizeSettings, DEFAULT_SETTINGS } from './settings.js';
 import { validateScenario, encodeScenario, scenarioFromHash, buildExport, parseImport, MAX_BODIES } from './scenario.js';
 import { buildIssueUrl } from './feedback.js';
+import { showVisitCount } from './visits.js';
 import { $, toast, confirmDialog, downloadJson, fmt } from './ui.js';
 
 /* global __APP_VERSION__ */
@@ -621,3 +622,5 @@ document.addEventListener('click', (e) => {
 renderSaved();
 initialScenario();
 syncControls();
+// Anonymous visit count (fire-and-forget; shows nothing on failure).
+showVisitCount($('#visit-count'));

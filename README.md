@@ -2,7 +2,9 @@
 
 # Gravitas
 
-**Every body attracts.** Gravitas is an interactive N-body gravity sandbox that runs entirely in your browser. Launch planets with a flick, build binary stars, watch the famous figure-eight three-body orbit, and switch integrators to see why physics engines care about numerical methods. The source is commented so it doubles as a learning resource for simulation loops.
+![Visits](https://abacus.jasoncameron.dev/get/lance6x5.github.io/orbit-sim/shield)
+
+**Every body attracts.** Gravitas is an interactive N-body gravity sandbox where the simulation runs entirely in your browser. Launch planets with a flick, build binary stars, watch the famous figure-eight three-body orbit, and switch integrators to see why physics engines care about numerical methods. The source is commented so it doubles as a learning resource for simulation loops.
 
 Live: https://lance6x5.github.io/orbit-sim/
 
@@ -17,6 +19,7 @@ Live: https://lance6x5.github.io/orbit-sim/
 - **Your data:** saved scenarios, settings, and an autosave of the last scene are kept in `localStorage`. You can export or import everything as JSON, and "Reset all data" asks for confirmation first.
 - **PWA:** installable and works offline (vite-plugin-pwa). Light and dark themes follow your system setting.
 - **In-app feedback:** the header's Feedback menu opens a pre-filled GitHub issue.
+- **Visit count:** a small anonymous page-load count in the Controls panel footer (see [Privacy & analytics](#privacy--analytics)).
 
 ### Keyboard
 
@@ -30,6 +33,15 @@ Live: https://lance6x5.github.io/orbit-sim/
 | `F` | Toggle camera follow |
 | Delete | Remove selected body |
 | Esc | Cancel launch / deselect |
+
+## Privacy & analytics
+
+Your scenarios and settings never leave your device. The only outside request is an anonymous visit count: one page-load count per browser session via the open-source [Abacus](https://github.com/JasonLovesDoggo/abacus) counter.
+
+- No cookies and no personal data are stored. No app or scenario data is sent (the share-link hash is never read by the counter).
+- Do Not Track and Global Privacy Control are respected: with either on, the page is not counted (it only reads the current total). Nothing is counted on `localhost`.
+- Like any web request, it reveals your IP address to the counter service.
+- The count is approximate (it includes bots and is not unique visitors) and public.
 
 ## Development
 
@@ -54,6 +66,7 @@ src/presets.js   built-in scenarios
 src/scenario.js  validation, URL-hash sharing, JSON export/import
 src/settings.js  defaults + localStorage persistence
 src/feedback.js  GitHub issue URL builder
+src/visits.js    anonymous visit counter (Abacus)
 src/main.js      wiring and DOM controls
 ```
 
