@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Gravitas - Every body attracts</title>
+    <meta name="description" content="Gravitas: a gravity sandbox where every body attracts. Launch planets, build orbits, and learn how N-body physics simulations work - right in your browser." />
+    <meta name="theme-color" content="#14112e" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <a class="skip-link" href="#panel">Skip to controls</a>
+    <header class="topbar">
+      <div class="brand">
+        <img src="/logo-mark.svg" alt="" width="36" height="36" />
+        <div class="brand-text">
+          <span class="brand-name">Gravitas</span>
+          <span class="brand-tagline">Every body attracts.</span>
+        </div>
+      </div>
+      <nav class="top-actions" aria-label="Simulation">
+        <button id="btn-play" type="button" class="btn btn-primary" aria-pressed="true" title="Play / pause (Space)">Pause</button>
+        <button id="btn-step" type="button" class="btn" title="Step one frame (.)">Step</button>
+        <button id="btn-help" type="button" class="btn" aria-haspopup="dialog">How it works</button>
+        <details class="menu" id="feedback-menu">
+          <summary class="btn" aria-label="Feedback: report a bug or request a feature">Feedback</summary>
+          <div class="menu-pop">
+            <a id="fb-bug" class="btn btn-block" href="https://github.com/lance6x5/orbit-sim/issues/new?template=bug_report.yml" target="_blank" rel="noopener">Report a bug</a>
+            <a id="fb-feature" class="btn btn-block" href="https://github.com/lance6x5/orbit-sim/issues/new?template=feature_request.yml" target="_blank" rel="noopener">Request a feature</a>
+            <p class="muted small">Opens GitHub &mdash; a free GitHub account is required. Don't include personal data.</p>
+          </div>
+        </details>
+        <button id="btn-panel"type="button" class="btn" aria-expanded="false" aria-controls="panel">Controls</button>
+      </nav>
+    </header>
+
+    <main class="stage">
+      <canvas
+        id="sim"
+        tabindex="0"
+        role="application"
+        aria-label="Gravity simulation. Drag on empty space to launch a body."
+        aria-describedby="canvas-hint"
+      ></canvas>
+
+      <div class="hud" aria-hidden="true">
+        <span><b id="hud-fps">0</b> FPS</span>
+        <span><b id="hud-count">0</b> bodies</span>
+        <span>Energy drift <b id="hud-energy">-</b></span>
+        <span id="hud-integrator" class="hud-tag">Verlet</span>
+      </div>
+
+      <p id="canvas-hint" class="hint">
+        Drag on empty space to launch a body. Click a body to inspect it. Right-drag or Shift+drag to pan, scroll or pinch to zoom.
+        Keys: Space pause, . step, arrows pan, + / - zoom, [ ] select, F follow, Delete remove, Esc cancel.
+      </p>
+
+      <section id="selection" class="card selection" aria-labelledby="sel-title" hidden>
+        <div class="card-head">
+          <h2 id="sel-title">Body</h2>
+          <button id="sel-close" type="button" class="icon-btn" aria-label="Deselect body">&times;</button>
+        </div>
+        <dl class="stats">
+          <dt>Mass</dt><dd id="sel-mass">-</dd>
+          <dt>Speed</dt><dd id="sel-speed">-</dd>
+          <dt>Position</dt><dd id="sel-pos">-</dd>
+        </dl>
+        <div class="row">
+          <label class="check"><input id="sel-follow" type="checkbox" /> Camera follows</label>
+          <button id="sel-delete" type="button" class="btn btn-small btn-danger">Delete</button>
+        </div>
+      </section>
+
+      <aside id="panel" class="panel" aria-label="Controls" tabindex="-1">
+        <section class="group" aria-labelledby="g-sim">
+          <h2 id="g-sim">Simulation</h2>
+          <label class="slider">
+            <span>Time scale <output id="out-timeScale" for="in-timeScale">1x</output></span>
+            <input id="in-timeScale" type="range" min="0.1" max="8" step="0.1" />
+          </label>
+          <label class="slider">
+            <span>Gravity G <output id="out-G" for="in-G">1</output></span>
+            <input id="in-G" type="range" min="0" max="5" step="0.05" />
+          </label>
+          <label class="slider">
+            <span>Softening &epsilon; <output id="out-softening" for="in-softening">2</output></span>
+            <input id="in-softening" type="range" min="0" max="20" step="0.5" />
+          </label>
+          <fieldset class="seg">
+            <legend>Integrator</legend>
+            <label><input type="radio" name="integrator" value="verlet" /> Velocity Verlet</label>
+            <label><input type="radio" name="integrator" value="euler" /> Euler</label>
+          </fieldset>
+          <label class="field">
+            <span>Collisions</span>
+            <select id="in-collision">
+              <option value="merge">Merge (conserve momentum)</option>
+              <option value="bounce">Bounce (elastic)</option>
+              <option value="pass">Pass through</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="group" aria-labelledby="g-new">
+          <h2 id="g-new">New body</h2>
+          <label class="slider">
+            <span>Mass <output id="out-newMass" for="in-newMass">10</output></span>
+            <input id="in-newMass" type="range" min="0" max="100" step="1" />
+          </label>
+          <button id="btn-add-orbit" type="button" class="btn btn-block">Add orbiting body</button>
+        </section>
+
+        <section class="group" aria-labelledby="g-display">
+          <h2 id="g-display">Display</h2>
+          <label class="check"><input id="in-trails" type="checkbox" /> Trails</label>
+          <label class="check"><input id="in-vectors" type="checkbox" /> Velocity vectors</label>
+          <label class="check"><input id="in-com" type="checkbox" /> Center of mass</label>
+          <button id="btn-fit" type="button" class="btn btn-block">Fit all in view</button>
+        </section>
+
+        <section class="group" aria-labelledby="g-presets">
+          <h2 id="g-presets">Scenarios</h2>
+          <div id="preset-list" class="preset-grid"></div>
+          <div class="row">
+            <button id="btn-share" type="button" class="btn">Copy share link</button>
+            <button id="btn-clear" type="button" class="btn btn-danger">Clear all</button>
+          </div>
+        </section>
+
+        <section class="group" aria-labelledby="g-saved">
+          <h2 id="g-saved">My scenarios</h2>
+          <form id="save-form" class="row">
+            <label class="sr-only" for="save-name">Scenario name</label>
+            <input id="save-name" type="text" maxlength="60" placeholder="Name this setup" required />
+            <button type="submit" class="btn">Save</button>
+          </form>
+          <ul id="saved-list" class="saved-list"></ul>
+          <p id="saved-empty" class="muted">No saved scenarios yet.</p>
+        </section>
+
+        <section class="group" aria-labelledby="g-data">
+          <h2 id="g-data">Data</h2>
+          <div class="row">
+            <button id="btn-export" type="button" class="btn">Export JSON</button>
+            <button id="btn-import" type="button" class="btn">Import JSON</button>
+            <input id="file-import" type="file" accept="application/json,.json" hidden />
+          </div>
+          <button id="btn-reset" type="button" class="btn btn-danger btn-block">Reset all data</button>
+        </section>
+
+        <footer class="panel-foot">
+          <span>Gravitas <span class="app-version"></span></span>
+        </footer>
+      </aside>
+    </main>
+
+    <dialog id="help-dialog" aria-labelledby="help-title">
+      <div class="dialog-body">
+        <div class="card-head">
+          <h2 id="help-title">How it works</h2>
+          <button type="button" class="icon-btn" data-close aria-label="Close">&times;</button>
+        </div>
+        <h3>Gravity</h3>
+        <p>
+          Every body pulls on every other body (N-body gravity). Newton's law says the force between two masses is
+          <code>F = G &middot; m<sub>1</sub> &middot; m<sub>2</sub> / d<sup>2</sup></code>. Dividing by a body's own
+          mass gives its acceleration toward the other one.
+        </p>
+        <p>
+          <strong>Softening:</strong> when two bodies nearly touch, <code>d</code> approaches 0 and the force explodes. We use
+          <code>d<sup>2</sup> + &epsilon;<sup>2</sup></code> instead of <code>d<sup>2</sup></code>, which changes nothing far
+          away but caps the force up close.
+        </p>
+        <h3>The simulation loop</h3>
+        <p>
+          Physics runs in fixed time steps (120 per second at 1x), separate from drawing. Each frame, the real time elapsed is
+          added to an <em>accumulator</em>, and as many fixed steps as fit are run. Same input, same result, on any screen refresh rate.
+        </p>
+        <h3>Integrators</h3>
+        <p>
+          <strong>Euler</strong> moves each body along its current velocity, then updates the velocity. Because it always steps
+          along a straight tangent line, orbits gain energy and spiral outward.
+        </p>
+        <p>
+          <strong>Velocity Verlet</strong> includes the curvature term <code>&frac12; a &Delta;t<sup>2</sup></code> and averages the
+          old and new accelerations. It is time-reversible and <em>symplectic</em>, so energy errors wobble instead of piling up, and
+          orbits stay closed. Watch the <em>Energy drift</em> readout while you switch between them.
+        </p>
+        <h3>Collisions</h3>
+        <p>
+          <strong>Merge</strong> joins bodies, conserving mass and momentum. <strong>Bounce</strong> applies an elastic impulse.
+          <strong>Pass through</strong> ignores contact.
+        </p>
+        <h3>Colors</h3>
+        <p>Body color follows mass: icy blue (small), teal, gold, orange star, white-hot giant.</p>
+        <p class="muted">Gravitas <span class="app-version"></span>. Your data stays in this browser; use Export to back it up.</p>
+      </div>
+    </dialog>
+
+    <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+      <form method="dialog" class="dialog-body">
+        <h2 id="confirm-title">Are you sure?</h2>
+        <p id="confirm-text"></p>
+        <div class="row end">
+          <button value="cancel" class="btn" autofocus>Cancel</button>
+          <button value="ok" class="btn btn-danger" id="confirm-ok">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

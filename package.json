@@ -1,0 +1,18 @@
+{
+  "name": "orbit-sim",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Gravitas: an N-body gravity sandbox built with vanilla JS and HTML5 Canvas.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11",
+    "vite-plugin-pwa": "^0.21.1",
+    "vitest": "^2.1.8"
+  }
+}

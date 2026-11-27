@@ -1,0 +1,43 @@
+name: Bug report
+description: Something in Gravitas is broken or behaves unexpectedly.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting! Please don't include personal data.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we make it happen? A share link (Copy share link) helps a lot.
+      placeholder: |
+        1. Load the "Binary star" scenario
+        2. Switch collisions to "Bounce"
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Shown in the Controls panel footer, e.g. v1.0.0
+  - type: input
+    id: environment
+    attributes:
+      label: Browser / OS
+  - type: textarea
+    id: notes
+    attributes:
+      label: Screenshots / notes
