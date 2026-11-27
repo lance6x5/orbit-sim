@@ -85,10 +85,12 @@ export async function getVisitCount({
       if (timer) clearTimeout(timer);
     }
     if (!res || !res.ok) return null;
-    if (action === 'hit') writeFlag(storage);
     const data = await res.json();
     const value = Number(data?.value);
-    return Number.isFinite(value) && value >= 0 ? value : null;
+    if (!Number.isFinite(value) || value < 0) return null;
+    // Only mark the session counted once the hit is confirmed with a valid value.
+    if (action === 'hit') writeFlag(storage);
+    return value;
   } catch {
     return null;
   }
