@@ -16,6 +16,11 @@ import { buildIssueUrl } from './feedback.js';
 import { showVisitCount } from './visits.js';
 import { $, toast, confirmDialog, downloadJson, fmt } from './ui.js';
 
+import { initInstallButton } from './install.js';
+
+// Offer an "Install app" button when the browser allows it and the app isn't installed yet.
+initInstallButton({ appName: 'Gravitas', selector: '.topbar' });
+
 /* global __APP_VERSION__ */
 const VERSION = typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : 'dev';
 
