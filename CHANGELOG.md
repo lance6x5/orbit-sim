@@ -5,6 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-11-27
+
+### Changed
+- Footer studio credit now uses the Silverlight DevTech company mark (the "47 Ag" periodic-table tile), replacing the interim crescent mark.
+
 ## [1.2.0] - 2026-11-27
 
 ### Added
@@ -45,6 +50,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - In-app feedback menu that opens pre-filled GitHub issues, plus bug report and feature request issue templates.
 - GitHub Actions deployment to GitHub Pages.
 
-[Unreleased]: https://github.com/lance6x5/orbit-sim/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/lance6x5/orbit-sim/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/lance6x5/orbit-sim/compare/v1.2.0...v1.2.1
 [1.1.0]: https://github.com/lance6x5/orbit-sim/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/lance6x5/orbit-sim/releases/tag/v1.0.0

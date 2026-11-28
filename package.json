@@ -1,7 +1,7 @@
 {
   "name": "orbit-sim",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "PolyForm-Noncommercial-1.0.0",
   "author": "Silverlight DevTech",
   "description": "Gravitas: an N-body gravity sandbox built with vanilla JS and HTML5 Canvas.",
